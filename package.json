@@ -1,0 +1,17 @@
+{
+  "name": "rashodika-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Android package build for the Rashodika app",
+  "scripts": {
+    "build:web": "node -e \"const fs=require('fs');fs.rmSync('www',{recursive:true,force:true});fs.mkdirSync('www');for(const f of ['index.html','manifest.json','icon.svg','sw.js'])fs.copyFileSync(f,'www/'+f);\"",
+    "android:sync": "npm run build:web && cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3"
+  }
+}
