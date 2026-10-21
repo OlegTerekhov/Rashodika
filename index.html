@@ -16,7 +16,7 @@
 <body>
 <div class="shell">
 <header class="top"><div class="brand"><div class="logo">Р</div><div><div class="brand-name">РАСХОДИКА</div><div class="tagline">Каждый расход под контролем</div></div></div><div class="top-date" id="topDate"></div></header>
-<div class="nav" id="desktopNav"><button data-tab="home" class="active">Обзор</button><button data-tab="procedure">Новая процедура</button><button data-tab="materials">Материалы</button><button data-tab="history">История</button></div>
+<div class="nav" id="desktopNav"><button data-tab="procedure">Новая процедура</button><button data-tab="home" class="active">Обзор</button><button data-tab="materials">Материалы</button><button data-tab="history">История</button></div>
 <main>
 <section id="home" class="section active"><h1>Финансы мастера</h1><p class="sub">Вся картина доходов и расходов — в одном месте.</p>
 <div class="dashboard-grid">
@@ -48,7 +48,7 @@
 <section id="history" class="section"><h1>История процедур</h1><p class="sub">Все записи, расходы и прибыль. Можно выгрузить данные в CSV.</p><div class="panel"><div class="panel-head"><h2>Журнал</h2><button class="btn secondary small" id="exportCsv">Экспорт CSV</button></div><div class="field-grid" style="margin-bottom:18px"><div class="field"><label for="historyFilter">Период</label><select id="historyFilter"><option value="all">За всё время</option><option value="today">Сегодня</option><option value="month">Текущий месяц</option></select></div><div class="field"><label for="historySearch">Поиск</label><input id="historySearch" placeholder="Клиент или услуга"></div></div><div class="table-wrap"><table><thead><tr><th>Дата</th><th>Клиент / услуга</th><th>Выручка</th><th>Материалы</th><th>Прибыль</th><th></th></tr></thead><tbody id="historyBody"></tbody></table></div><div id="historyEmpty" class="empty hidden">Пока нет процедур. Добавь первую запись.</div></div></section>
 <section id="settings" class="section"><h1>Настройки</h1><p class="sub">Управление данными и резервными копиями.</p><div class="panel settings-grid"><div class="panel-head"><h2>Резервная копия</h2></div><p class="muted">Экспортируй журнал процедур в CSV, чтобы сохранить копию данных. Материалы и процедуры хранятся локально в этом браузере.</p><button class="btn" id="exportCsv2">Скачать журнал CSV</button><div class="notice">Важно: очистка данных браузера или смена устройства может удалить доступ к записям. Облачная синхронизация пока не подключена.</div></div><div class="panel settings-grid"><div class="panel-head"><h2>Удаление данных</h2></div><p class="muted">Это удалит все материалы и процедуры с текущего устройства. Действие нельзя отменить.</p><button class="btn danger" id="clearData">Удалить все данные</button></div><p class="muted" style="font-size:12px">Расходика · версия 1.0 · бесплатно</p></section>
 </main></div>
-<div class="bottom-nav" id="mobileNav"><button class="active" data-tab="home"><span>▦</span>Обзор</button><button data-tab="procedure"><span>＋</span>Новая процедура</button><button data-tab="materials"><span>◫</span>Материалы</button><button data-tab="history"><span>≡</span>История</button></div>
+<div class="bottom-nav" id="mobileNav"><button data-tab="procedure"><span>＋</span>Новая процедура</button><button class="active" data-tab="home"><span>▦</span>Обзор</button><button data-tab="materials"><span>◫</span>Материалы</button><button data-tab="history"><span>≡</span>История</button></div>
 <div id="toast" class="toast hidden" role="status"></div>
 <script>
 (function(){
