@@ -30,7 +30,10 @@ assert.ok(icon.includes('<svg') && icon.includes('</svg>'));
 assert.equal(capacitor.appId, 'ru.terekhov.rashodika');
 assert.equal(capacitor.webDir, 'www');
 assert.ok(pkg.scripts && pkg.scripts['build:web']);
-console.log('PASS: manifest, icon, Capacitor and build config');
+assert.ok(pkg.scripts['build:web'].includes('privacy.html'), 'Android bundle must include privacy policy');
+assert.ok(html.includes('href="./privacy.html"'), 'Privacy policy link must be visible in app');
+assert.ok(fs.existsSync('privacy.html'), 'Privacy policy file missing');
+console.log('PASS: manifest, icon, Capacitor, privacy policy and build config');
 
 const checks = [
   ['local persistence', /localStorage\.getItem\(KEY/.test(html) && /localStorage\.setItem\(KEY/.test(html)],
