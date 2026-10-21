@@ -13,6 +13,7 @@ on:
       - 'capacitor.config.json'
       - 'scripts/qa-check.js'
       - 'store/**'
+      - 'privacy.html'
       - '.github/workflows/android-build.yml'
 
 permissions:
