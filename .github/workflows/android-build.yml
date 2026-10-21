@@ -11,6 +11,7 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - 'capacitor.config.json'
+      - 'scripts/qa-check.js'
       - '.github/workflows/android-build.yml'
 
 permissions:
