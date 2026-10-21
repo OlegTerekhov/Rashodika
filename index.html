@@ -16,23 +16,9 @@
 <body>
 <div class="shell">
 <header class="top"><div class="brand"><div class="logo">Р</div><div><div class="brand-name">РАСХОДИКА</div><div class="tagline">Каждый расход под контролем</div></div></div><div class="top-date" id="topDate"></div></header>
-<div class="nav" id="desktopNav"><button data-tab="procedure">Новая процедура</button><button data-tab="home" class="active">Обзор</button><button data-tab="materials">Материалы</button><button data-tab="history">История</button></div>
+
 <main>
-<section id="home" class="section active"><h1>Финансы мастера</h1><p class="sub">Вся картина доходов и расходов — в одном месте.</p>
-<div class="dashboard-grid">
-<div class="dashboard-left">
-<div class="panel"><div class="panel-head"><h2>Быстрый старт</h2><span class="eyebrow">2 шага</span></div><div class="list-row"><div><div class="list-title">1. Добавь материалы</div><div class="list-meta">Укажи цену упаковки и объём</div></div><button class="btn secondary small" data-goto="materials">Добавить</button></div><div class="list-row"><div><div class="list-title">2. Запиши процедуру</div><div class="list-meta">Прибыль посчитается автоматически</div></div><button class="btn small" data-goto="procedure">Записать</button></div><div class="notice">Данные пока хранятся в этом браузере на этом устройстве. Регулярно выгружай резервную копию CSV.</div></div>
-<div class="panel"><div class="panel-head"><h2>Последние процедуры</h2><button class="btn secondary small" data-goto="history">Вся история</button></div><div id="recentList"></div></div>
-</div>
-<div class="dashboard-right"><div class="stats">
-<div class="stat"><div class="stat-label">Выручка за месяц</div><div class="stat-value" id="monthRevenue">0 ₽</div><div class="stat-note">До вычета материалов</div></div>
-<div class="stat"><div class="stat-label">Чистая прибыль</div><div class="stat-value profit" id="monthProfit">0 ₽</div><div class="stat-note">Выручка минус материалы</div></div>
-<div class="stat"><div class="stat-label">Процедур за месяц</div><div class="stat-value" id="monthCount">0</div><div class="stat-note" id="monthAverage">Средний чек: 0 ₽</div></div>
-<div class="stat"><div class="stat-label">Расходы на материалы</div><div class="stat-value" id="monthCosts">0 ₽</div><div class="stat-note">За текущий месяц</div></div>
-</div></div>
-</div>
-</section>
-<section id="procedure" class="section"><h1>Новая процедура</h1><p class="sub">Запиши услугу и материалы — остальное посчитаем автоматически.</p>
+<section id="procedure" class="section active"><h1>Новая процедура</h1><p class="sub">Запиши услугу и материалы — остальное посчитаем автоматически.</p>
 <div class="layout"><div class="panel"><div class="panel-head"><h2>Данные клиента и услуги</h2></div><form id="procedureForm"><div class="field-grid">
 <div class="field"><label for="client">Имя клиента (необязательно)</label><input id="client" maxlength="80" placeholder="Например, Анна"></div>
 <div class="field"><label for="service">Название услуги</label><input id="service" required maxlength="100" placeholder="Например, маникюр"></div>
@@ -48,7 +34,7 @@
 <section id="history" class="section"><h1>История процедур</h1><p class="sub">Все записи, расходы и прибыль. Можно выгрузить данные в CSV.</p><div class="panel"><div class="panel-head"><h2>Журнал</h2><button class="btn secondary small" id="exportCsv">Экспорт CSV</button></div><div class="field-grid" style="margin-bottom:18px"><div class="field"><label for="historyFilter">Период</label><select id="historyFilter"><option value="all">За всё время</option><option value="today">Сегодня</option><option value="month">Текущий месяц</option></select></div><div class="field"><label for="historySearch">Поиск</label><input id="historySearch" placeholder="Клиент или услуга"></div></div><div class="table-wrap"><table><thead><tr><th>Дата</th><th>Клиент / услуга</th><th>Выручка</th><th>Материалы</th><th>Прибыль</th><th></th></tr></thead><tbody id="historyBody"></tbody></table></div><div id="historyEmpty" class="empty hidden">Пока нет процедур. Добавь первую запись.</div></div></section>
 <section id="settings" class="section"><h1>Настройки</h1><p class="sub">Управление данными и резервными копиями.</p><div class="panel settings-grid"><div class="panel-head"><h2>Резервная копия</h2></div><p class="muted">Экспортируй журнал процедур в CSV, чтобы сохранить копию данных. Материалы и процедуры хранятся локально в этом браузере.</p><button class="btn" id="exportCsv2">Скачать журнал CSV</button><div class="notice">Важно: очистка данных браузера или смена устройства может удалить доступ к записям. Облачная синхронизация пока не подключена.</div></div><div class="panel settings-grid"><div class="panel-head"><h2>Удаление данных</h2></div><p class="muted">Это удалит все материалы и процедуры с текущего устройства. Действие нельзя отменить.</p><button class="btn danger" id="clearData">Удалить все данные</button></div><p class="muted" style="font-size:12px">Расходика · версия 1.0 · бесплатно</p></section>
 </main></div>
-<div class="bottom-nav" id="mobileNav"><button data-tab="procedure"><span>＋</span>Новая процедура</button><button class="active" data-tab="home"><span>▦</span>Обзор</button><button data-tab="materials"><span>◫</span>Материалы</button><button data-tab="history"><span>≡</span>История</button></div>
+<div class="bottom-nav" id="mobileNav"><button class="active" data-tab="procedure"><span>＋</span>Новая процедура</button><button data-tab="materials"><span>◫</span>Материалы</button><button data-tab="history"><span>≡</span>История</button></div>
 <div id="toast" class="toast hidden" role="status"></div>
 <script>
 (function(){
@@ -70,13 +56,6 @@ document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()
 document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>goto(b.dataset.goto)));
 $('topDate').textContent=new Date().toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'});
 $('procDate').value=today();
-function renderDashboard(){
-const ym=today().slice(0,7),arr=state.procedures.filter(p=>(p.date||'').slice(0,7)===ym);
-const revenue=arr.reduce((s,p)=>s+num(p.price),0),cost=arr.reduce((s,p)=>s+procCost(p),0);
-$('monthRevenue').textContent=money(revenue);$('monthCosts').textContent=money(cost);$('monthProfit').textContent=money(revenue-cost);$('monthCount').textContent=arr.length;$('monthAverage').textContent='Средний чек: '+money(arr.length?revenue/arr.length:0);
-const recent=[...state.procedures].sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.createdAt||0)-(a.createdAt||0)).slice(0,5);
-$('recentList').innerHTML=recent.length?recent.map(p=>'<div class="list-row"><div><div class="list-title">'+safe(p.service)+'</div><div class="list-meta">'+safe(p.client||'Клиент не указан')+' · '+safe(p.date)+'</div></div><div class="list-right"><div class="list-price">'+money(p.price)+'</div><div class="list-meta '+(procProfit(p)<0?'negative':'profit-chip')+'">+'+money(procProfit(p))+'</div></div></div>').join(''):'<div class="empty">Здесь появятся твои процедуры.</div>';
-}
 function renderMaterials(){
 $('materialCount').textContent=state.materials.length+' позиц.';
 $('materialList').innerHTML=state.materials.length?state.materials.map(m=>'<div class="list-row"><div><div class="list-title">'+safe(m.name)+'</div><div class="list-meta">'+money(m.price)+' за '+safe(m.amount)+' '+safe(m.unit)+' · '+money(unitCost(m))+'/'+safe(m.unit)+'</div></div><div class="list-right" style="display:flex;gap:6px"><button class="btn secondary small" data-edit="'+safe(m.id)+'">Изменить</button><button class="btn danger small" data-delete-mat="'+safe(m.id)+'" aria-label="Удалить материал">×</button></div></div>').join(''):'<div class="empty">Пока материалов нет. Добавь первый слева.</div>';
@@ -95,7 +74,7 @@ $('price').addEventListener('input',updatePreview);
 $('procedureForm').addEventListener('reset',()=>setTimeout(()=>{ $('procDate').value=today();renderPicker();},0));
 $('procedureForm').addEventListener('submit',e=>{e.preventDefault();const price=num($('price').value),service=$('service').value.trim();if(!service||price<0){toast('Проверь название услуги и стоимость');return}
 const p={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),client:$('client').value.trim(),service,price,date:$('procDate').value||today(),items:chosenItems(),createdAt:Date.now()};
-state.procedures.push(p);save();$('procedureForm').reset();renderAll();goto('home');toast('Процедура сохранена')});
+state.procedures.push(p);save();$('procedureForm').reset();renderAll();goto('procedure');toast('Процедура сохранена')});
 function resetMaterialForm(){ $('materialForm').reset();$('materialId').value='';$('materialFormTitle').textContent='Добавить материал';$('materialSave').textContent='Сохранить материал';$('cancelEdit').classList.add('hidden');$('unitPreview').textContent='Цена единицы: —'}
 function editMaterial(id){const m=state.materials.find(x=>x.id===id);if(!m)return;$('materialId').value=m.id;$('matName').value=m.name;$('matPrice').value=m.price;$('matAmount').value=m.amount;$('matUnit').value=m.unit;$('materialFormTitle').textContent='Изменить материал';$('materialSave').textContent='Сохранить изменения';$('cancelEdit').classList.remove('hidden');$('unitPreview').textContent='Новая цена единицы: '+money(unitCost(m))+'/'+m.unit;document.querySelector('.section.active').scrollTo?.(0,0);$('matName').focus()}
 $('cancelEdit').addEventListener('click',resetMaterialForm);
@@ -109,7 +88,7 @@ function deleteProcedure(id){if(!confirm('Удалить эту процедур
 function exportCSV(){const rows=[['Дата','Клиент','Услуга','Выручка, RUB','Материалы, RUB','Прибыль, RUB','Состав материалов'],...state.procedures.map(p=>[p.date,p.client,p.service,num(p.price).toFixed(2),procCost(p).toFixed(2),procProfit(p).toFixed(2),(p.items||[]).map(i=>i.name+' '+i.quantity+' '+i.unit+' ('+i.savedCost.toFixed(2)+' руб.)').join('; ')])];const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='rashodika-'+today()+'.csv';a.click();URL.revokeObjectURL(url);toast('CSV-файл подготовлен')}
 $('exportCsv').addEventListener('click',exportCSV);$('exportCsv2').addEventListener('click',exportCSV);
 $('clearData').addEventListener('click',()=>{if(!confirm('Точно удалить ВСЕ материалы и процедуры на этом устройстве?'))return;state={materials:[],procedures:[]};save();resetMaterialForm();renderAll();goto('home');toast('Данные удалены')});
-function renderAll(){renderDashboard();renderMaterials();renderHistory();updateUnitPreview()}
+function renderAll(){renderMaterials();renderHistory();updateUnitPreview()}
 renderAll();
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();
