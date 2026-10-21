@@ -7,7 +7,7 @@ const capacitor = JSON.parse(fs.readFileSync('capacitor.config.json', 'utf8'));
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 const icon = fs.readFileSync('icon.svg', 'utf8');
 
-const scripts = [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)];
+const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
 assert.ok(scripts.length, 'No inline JavaScript found');
 for (const [i, match] of scripts.entries()) {
   if (match[1].trim()) {
@@ -33,12 +33,12 @@ assert.ok(pkg.scripts && pkg.scripts['build:web']);
 console.log('PASS: manifest, icon, Capacitor and build config');
 
 const checks = [
-  ['local persistence', /localStorage\\.getItem\\(KEY/.test(html) && /localStorage\\.setItem\\(KEY/.test(html)],
-  ['material stock deduction', /m\\.stockRemaining=stockOf\\(m\\)-i\\.quantity/.test(html)],
-  ['stock restoration on procedure deletion', /stockOf\\(m\\)\\+Math\\.max\\(0,num\\(i\\.quantity\\)\\)/.test(html)],
-  ['backup export and import', /rashodika-backup-/.test(html) && /JSON\\.parse\\(await file\\.text\\(\\)\\)/.test(html)],
-  ['safe text escaping', /function safe\\(s\\)/.test(html)],
-  ['CSV export', /function exportCSV\\(\\)/.test(html)]
+  ['local persistence', /localStorage\.getItem\(KEY/.test(html) && /localStorage\.setItem\(KEY/.test(html)],
+  ['material stock deduction', /m\.stockRemaining=stockOf\(m\)-i\.quantity/.test(html)],
+  ['stock restoration on procedure deletion', /stockOf\(m\)\+Math\.max\(0,num\(i\.quantity\)\)/.test(html)],
+  ['backup export and import', /rashodika-backup-/.test(html) && /JSON\.parse\(await file\.text\(\)\)/.test(html)],
+  ['safe text escaping', /function safe\(s\)/.test(html)],
+  ['CSV export', /function exportCSV\(\)/.test(html)]
 ];
 for (const [name, ok] of checks) assert.ok(ok, 'Missing core feature check: ' + name);
 console.log('PASS: core feature markers (' + checks.length + ')');
