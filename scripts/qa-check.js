@@ -37,7 +37,7 @@ const checks = [
   ['material stock deduction', /m\.stockRemaining=stockOf\(m\)-i\.quantity/.test(html)],
   ['stock restoration on procedure deletion', /stockOf\(m\)\+Math\.max\(0,num\(i\.quantity\)\)/.test(html)],
   ['backup export and import', /rashodika-backup-/.test(html) && /JSON\.parse\(await file\.text\(\)\)/.test(html)],
-  ['safe text escaping', /function safe\(s\)/.test(html)],
+  ['safe text escaping', /const safe=s=>/.test(html)],
   ['CSV export', /function exportCSV\(\)/.test(html)]
 ];
 for (const [name, ok] of checks) assert.ok(ok, 'Missing core feature check: ' + name);
