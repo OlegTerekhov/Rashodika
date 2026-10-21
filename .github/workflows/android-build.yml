@@ -12,6 +12,7 @@ on:
       - 'package-lock.json'
       - 'capacitor.config.json'
       - 'scripts/qa-check.js'
+      - 'store/**'
       - '.github/workflows/android-build.yml'
 
 permissions:
@@ -50,11 +51,56 @@ jobs:
       - name: Sync Android project
         run: npx cap sync android
 
+      - name: Configure release signing when repository secrets are available
+        if: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' && secrets.ANDROID_KEYSTORE_PASSWORD != '' && secrets.ANDROID_KEY_ALIAS != '' && secrets.ANDROID_KEY_PASSWORD != '' }}
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/release-key.jks
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("android/app/build.gradle")
+          s = p.read_text()
+          marker = "    buildTypes {"
+          signing = """    signingConfigs {
+                  release {
+                      storeFile file("release-key.jks")
+                      storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                      keyAlias System.getenv("ANDROID_KEY_ALIAS")
+                      keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+                  }
+              }
+
+          """
+          if marker not in s:
+              raise SystemExit("Could not find Android buildTypes block; refusing to produce a falsely signed release.")
+          s = s.replace(marker, signing + marker, 1)
+          release_marker = "        release {"
+          if release_marker not in s:
+              raise SystemExit("Could not find release build type.")
+          s = s.replace(release_marker, release_marker + '\n            signingConfig signingConfigs.release', 1)
+          p.write_text(s)
+          PY
+
       - name: Build debug APK for device testing
         run: |
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
+
+      - name: Build signed release APK and AAB
+        if: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' && secrets.ANDROID_KEYSTORE_PASSWORD != '' && secrets.ANDROID_KEY_ALIAS != '' && secrets.ANDROID_KEY_PASSWORD != '' }}
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          cd android
+          ./gradlew assembleRelease bundleRelease
+          rm -f app/release-key.jks
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v5
@@ -63,3 +109,14 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
+
+      - name: Upload signed release APK and AAB
+        if: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' && secrets.ANDROID_KEYSTORE_PASSWORD != '' && secrets.ANDROID_KEY_ALIAS != '' && secrets.ANDROID_KEY_PASSWORD != '' }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: rashodika-android-release
+          path: |
+            android/app/build/outputs/apk/release/app-release.apk
+            android/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 30
