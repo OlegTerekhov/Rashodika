@@ -5,7 +5,8 @@
   "description": "Android package build for the Rashodika app",
   "scripts": {
     "build:web": "node -e \"const fs=require('fs');fs.rmSync('www',{recursive:true,force:true});fs.mkdirSync('www');for(const f of ['index.html','manifest.json','icon.svg','sw.js'])fs.copyFileSync(f,'www/'+f);\"",
-    "android:sync": "npm run build:web && cap sync android"
+    "android:sync": "npm run build:web && cap sync android",
+    "check": "node scripts/qa-check.js"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.3",
