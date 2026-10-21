@@ -1,0 +1,9 @@
+{
+  "appId": "ru.terekhov.rashodika",
+  "appName": "Расходика",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
