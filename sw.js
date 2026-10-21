@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rashodika-v6';
+const CACHE_NAME = 'rashodika-v7';
 const APP_FILES = ['./', './index.html', './manifest.json', './icon.svg'];
 
 self.addEventListener('install', event => {
